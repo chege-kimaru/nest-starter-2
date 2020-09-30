@@ -1,10 +1,24 @@
 {
-  "name": "scoliosis-api",
+  "name": "nest_tarter",
   "version": "0.0.1",
   "description": "",
-  "author": "",
-  "private": true,
+  "author": "Kevin Kimaru",
+  "private": false,
   "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chege-kimaru/nest-starter-2.git"
+  },
+  "keywords": [
+    "nest js",
+    "starter",
+    "nest starter",
+    "sequelize"
+  ],
+  "bugs": {
+    "url": "https://github.com/chege-kimaru/nest-starter-2/issues"
+  },
+  "homepage": "https://github.com/chege-kimaru/nest-starter-2",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
