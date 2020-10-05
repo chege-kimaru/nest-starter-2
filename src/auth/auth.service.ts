@@ -12,6 +12,7 @@ import { User } from '../user/user.model';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfigService } from '@nestjs/config';
 import { Op } from 'sequelize';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 export enum Provider {
   GOOGLE = 'google',
@@ -408,6 +409,19 @@ export class AuthService {
       } else {
         throw new ForbiddenException('Incorrect Password. Please try again');
       }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async updateUser(user: User, userDto: UpdateUserDto): Promise<any> {
+    try {
+      let u = await user.update(userDto);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      u = u.dataValues;
+      delete u.password;
+      return u;
     } catch (e) {
       throw e;
     }

@@ -7,7 +7,7 @@ import {
   Body,
   HttpCode,
   Req,
-  Res, Response, Redirect,
+  Res, Response, Redirect, Put
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterUserDto } from './dto/register.user.dto';
@@ -21,6 +21,7 @@ import { ForgotChangePassDto } from './dto/forgot.change.pass.dto';
 import { GoogleAuthGuard } from './guards/google-auth.guard';
 import { FacebookAuthGuard } from './guards/facebook.auth.guard';
 import { ConfigService } from '@nestjs/config';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -118,4 +119,9 @@ export class AuthController {
     return req.user;
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Put('update')
+  updateUser(@Request() req, @Body() userDto: UpdateUserDto) {
+    return this.authService.updateUser(req.user, userDto);
+  }
 }
