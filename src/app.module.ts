@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { EventModule } from './event/event.module';
-import { StoryModule } from './story/story.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SharedModule } from './shared/shared.module';
@@ -11,10 +9,7 @@ import { UserModule } from './user/user.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import path from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { ProjectModule } from './project/project.module';
 import { EmailSubscriptionModule } from './email-subscription/email-subscription.module';
-import { Donation } from './donation/donation.model';
-import { DonationModule } from './donation/donation.module';
 import { AuthService } from './auth/auth.service';
 
 @Module({
@@ -47,7 +42,7 @@ import { AuthService } from './auth/auth.service';
           },
         },
         defaults: {
-          from: `"Scoliosis" <${configService.get('MAIL_USER')}>`,
+          from: `${configService.get('MAIL_FROM')}`,
         },
         preview: true,
         template: {
@@ -68,14 +63,10 @@ import { AuthService } from './auth/auth.service';
       }),
       inject: [ConfigService],
     }),
-    EventModule,
-    StoryModule,
     AuthModule,
     UserModule,
     SharedModule,
-    ProjectModule,
-    EmailSubscriptionModule,
-    DonationModule,
+    EmailSubscriptionModule
   ],
   controllers: [AppController],
   providers: [AppService],

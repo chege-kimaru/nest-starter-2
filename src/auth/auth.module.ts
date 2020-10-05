@@ -19,10 +19,11 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { GoogleAuthGuard } from './guards/google-auth.guard';
 import { FacebookAuthGuard } from './guards/facebook.auth.guard';
 import { FacebookStrategy } from './strategies/facebook.strategy';
+import { User } from 'src/user/user.model';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([Role, UserRole, EmailVerificationToken, ForgotPasswordToken]),
+    SequelizeModule.forFeature([Role, UserRole, User, EmailVerificationToken, ForgotPasswordToken]),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

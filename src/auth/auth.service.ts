@@ -11,6 +11,7 @@ import { ForgotPasswordToken } from './model/forgot.password.token.model';
 import { User } from '../user/user.model';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfigService } from '@nestjs/config';
+import { Op } from 'sequelize';
 
 export enum Provider {
   GOOGLE = 'google',
@@ -22,13 +23,17 @@ export enum Provider {
 export class AuthService {
 
   constructor(@InjectModel(Role) private roleModel: typeof Role,
-              @InjectModel(User) private userModel: typeof User,
-              @InjectModel(EmailVerificationToken) private emailVTokenModel: typeof EmailVerificationToken,
-              @InjectModel(ForgotPasswordToken) private fPassTokenModel: typeof ForgotPasswordToken,
-              private mailerService: MailerService,
-              private configService: ConfigService,
-              private sequelize: Sequelize,
-              private jwtService: JwtService) {
+    @InjectModel(User) private userModel: typeof User,
+    @InjectModel(EmailVerificationToken) private emailVTokenModel: typeof EmailVerificationToken,
+    @InjectModel(ForgotPasswordToken) private fPassTokenModel: typeof ForgotPasswordToken,
+    private mailerService: MailerService,
+    private configService: ConfigService,
+    private sequelize: Sequelize,
+    private jwtService: JwtService) {
+  }
+
+  findUserById(userId: string) {
+    return this.userModel.findByPk(userId);
   }
 
   async validateUser(email: string, pass: string): Promise<any> {
@@ -110,8 +115,8 @@ export class AuthService {
       let user = await this.userModel.findOne({ where: { email: userDto.email }, transaction });
       if (!user) {
         user = await this.userModel.create(userDto, { transaction });
-        const role = await this.roleModel.findOne({ where: { name: 'admin' }, transaction });
-        await user.$add('roles', role, { transaction });
+        const roles = await this.roleModel.findAll({ where: { name: { [Op.or]: ['admin', 'user'] } }, transaction });
+        await user.$add('roles', roles, { transaction });
       }
       await transaction.commit();
     } catch (e) {
@@ -196,7 +201,6 @@ export class AuthService {
         .mailerService
         .sendMail({
           to,
-          // from: 'kevin@lloydconstellations.com',
           subject: 'Please verify your email',
           template: 'verify-email',
           context,
@@ -212,7 +216,6 @@ export class AuthService {
         .mailerService
         .sendMail({
           to,
-          // from: 'kevin@lloydconstellations.com',
           subject: 'Company: Renew Password',
           template: 'forgot-password',
           context,
@@ -393,7 +396,7 @@ export class AuthService {
   }
 
   async changePassword({ user, currentPassword, newPassword }:
-                         { user: User, currentPassword: string, newPassword: string }) {
+    { user: User, currentPassword: string, newPassword: string }) {
     try {
       const userPass = await this.userModel.findByPk(user.id, { attributes: ['password'] });
       if (await bcrypt.compare(currentPassword, userPass.password)) {

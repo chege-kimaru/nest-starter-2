@@ -7,7 +7,6 @@ import {
   PrimaryKey,
   Table, UpdatedAt,
 } from 'sequelize-typescript';
-import { Donation } from '../../donation/donation.model';
 
 @Table({ tableName: 'Payments' })
 export class Payment extends Model<Event> {
@@ -34,7 +33,4 @@ export class Payment extends Model<Event> {
   @UpdatedAt
   @Column({ allowNull: false })
   updatedAt: Date;
-
-  @HasOne(() => Donation)
-  donation: Donation[];
 }
