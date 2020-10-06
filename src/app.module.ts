@@ -9,7 +9,7 @@ import { UserModule } from './user/user.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import path from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { EmailSubscriptionModule } from './email-subscription/email-subscription.module';
+import { EmailSubscriptionsModule } from './email-subscriptions/email-subscriptions.module';
 import { AuthService } from './auth/auth.service';
 
 @Module({
@@ -66,7 +66,7 @@ import { AuthService } from './auth/auth.service';
     AuthModule,
     UserModule,
     SharedModule,
-    EmailSubscriptionModule
+    EmailSubscriptionsModule
   ],
   controllers: [AppController],
   providers: [AppService],

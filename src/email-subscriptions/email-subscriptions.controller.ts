@@ -9,7 +9,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { CreateEmailSubscriptionDto } from './dto/create.email-subscription.dto';
-import { EmailSubscriptionService } from './email-subscription.service';
+import { EmailSubscriptionsService } from './email-subscriptions.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { CloudinaryConfigService } from '../shared/cloudinary-config.service';
@@ -22,9 +22,9 @@ import { ApiBearerAuth, ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } 
 
 @ApiTags('Email Subscription')
 @Controller('email-subscriptions')
-export class EmailSubscriptionController {
+export class EmailSubscriptionsController {
 
-  constructor(private emailSubscriptionService: EmailSubscriptionService) {
+  constructor(private emailSubscriptionService: EmailSubscriptionsService) {
   }
 
   @ApiOperation({ summary: 'Subscribe to news letter' })
