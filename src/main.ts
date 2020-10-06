@@ -20,6 +20,7 @@ async function bootstrap() {
     .setDescription('Scoliosis Kenya Foundation Conference App API Documentation')
     .setVersion('1.0')
     .addTag('Auth')
+    .addTag('Email Subscription')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
