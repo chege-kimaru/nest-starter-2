@@ -21,6 +21,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('Auth')
     .addTag('Email Subscription')
+    .addTag('Users')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
