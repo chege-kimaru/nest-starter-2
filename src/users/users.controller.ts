@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Req, UseGuards } from '@nestjs/common';
-import { UserService } from './user.service';
+import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/guards/roles.decorator';
@@ -7,9 +7,9 @@ import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@ne
 
 @ApiTags('Users')
 @Controller('users')
-export class UserController {
+export class UsersController {
 
-  constructor(private usersService: UserService) {
+  constructor(private usersService: UsersService) {
   }
 
   @ApiBearerAuth()

@@ -4,7 +4,7 @@ import { Role } from 'src/auth/model/role.model';
 import { User } from './user.model';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(@InjectModel(User) private userModel: typeof User) {
   }
 

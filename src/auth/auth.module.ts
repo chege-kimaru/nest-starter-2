@@ -4,7 +4,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserModule } from '../user/user.module';
+import { UsersModule } from '../users/users.module';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { JwtStrategy } from './strategies/jwt-strategy';
@@ -19,7 +19,7 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { GoogleAuthGuard } from './guards/google-auth.guard';
 import { FacebookAuthGuard } from './guards/facebook.auth.guard';
 import { FacebookStrategy } from './strategies/facebook.strategy';
-import { User } from 'src/user/user.model';
+import { User } from 'src/users/user.model';
 
 @Module({
   imports: [

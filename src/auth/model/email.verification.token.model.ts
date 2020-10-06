@@ -4,7 +4,7 @@ import {
   PrimaryKey,
   Table, Unique, UpdatedAt,
 } from 'sequelize-typescript';
-import { User } from '../../user/user.model';
+import { User } from '../../users/user.model';
 
 @Table({ tableName: 'EmailVerificationTokens' })
 export class EmailVerificationToken extends Model<EmailVerificationToken> {

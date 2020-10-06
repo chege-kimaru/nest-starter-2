@@ -8,7 +8,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Role } from './model/role.model';
 import { EmailVerificationToken } from './model/email.verification.token.model';
 import { ForgotPasswordToken } from './model/forgot.password.token.model';
-import { User } from '../user/user.model';
+import { User } from '../users/user.model';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfigService } from '@nestjs/config';
 import { Op } from 'sequelize';

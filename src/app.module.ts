@@ -5,7 +5,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
+import { UsersModule } from './users/users.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import path from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
@@ -64,7 +64,7 @@ import { AuthService } from './auth/auth.service';
       inject: [ConfigService],
     }),
     AuthModule,
-    UserModule,
+    UsersModule,
     SharedModule,
     EmailSubscriptionsModule
   ],
