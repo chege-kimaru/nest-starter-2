@@ -186,8 +186,11 @@ export class AuthService {
       });
 
       await transaction.commit();
+      // @ts-ignore
+      const userDataValues = user.dataValues;
+      delete userDataValues.password;
       return {
-        user,
+        userDataValues,
         message: 'An email with a verification link has been sent to you. Please click the link to verify your email.',
       };
     } catch (e) {
@@ -302,6 +305,7 @@ export class AuthService {
       await this.sendEmailVerificationMail(user.email, {
         email: user.email,
         token: emailVToken.token,
+        link: `${this.configService.get('CLIENT_EMAIL_VERIFY_REDIRECT')}?email-verify=success&email=${user.email}&token=${emailVToken.token}`,
       });
       return {
         user,
@@ -402,6 +406,10 @@ export class AuthService {
       const userPass = await this.userModel.findByPk(user.id, { attributes: ['password'] });
       if (await bcrypt.compare(currentPassword, userPass.password)) {
         await user.update({ password: await bcrypt.hash(newPassword, 10) });
+
+        // @ts-ignore
+        user = user.dataValues;
+        delete user.password;
         return {
           user,
           message: 'You have successfully changed your password',
