@@ -4,7 +4,7 @@ import {
   PrimaryKey,
   Table, Unique, UpdatedAt,
 } from 'sequelize-typescript';
-import { User } from '../../user/user.model';
+import { User } from '../../users/user.model';
 
 @Table({ tableName: 'ForgotPasswordTokens' })
 export class ForgotPasswordToken extends Model<ForgotPasswordToken> {

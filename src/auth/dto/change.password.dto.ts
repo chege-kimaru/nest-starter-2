@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, MinLength } from 'class-validator';
-import { User } from '../../user/user.model';
+import { User } from '../../users/user.model';
 
 export class ChangePasswordDto {
   user: User;

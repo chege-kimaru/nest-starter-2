@@ -1,10 +1,10 @@
 import { Injectable, NestMiddleware, NotFoundException } from '@nestjs/common';
 import { Response } from 'express';
-import { UserService } from '../user.service';
+import { UsersService } from '../users.service';
 
 @Injectable()
 export class UserMiddleware implements NestMiddleware {
-    constructor(private usersService: UserService) {
+    constructor(private usersService: UsersService) {
     }
 
     async use(req: any, res: Response, next: Function) {

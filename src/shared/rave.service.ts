@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
-import { RavePayment } from '../payment/model/rave.payment.model';
+import { RavePayment } from '../payments/model/rave.payment.model';
 
 @Injectable()
 export class RaveService {

@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { EmailSubscriptionService } from './email-subscription.service';
-import { EmailSubscriptionController } from './email-subscription.controller';
+import { EmailSubscriptionsService } from './email-subscriptions.service';
+import { EmailSubscriptionsController } from './email-subscriptions.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
@@ -12,10 +12,10 @@ import { EmailSubscription } from './email-subscription.model';
     AuthModule,
     SharedModule,
   ],
-  providers: [EmailSubscriptionService],
-  controllers: [EmailSubscriptionController],
+  providers: [EmailSubscriptionsService],
+  controllers: [EmailSubscriptionsController],
 })
-export class EmailSubscriptionModule implements NestModule {
+export class EmailSubscriptionsModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
   }
 

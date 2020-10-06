@@ -9,7 +9,7 @@ import { EmailSubscription } from './email-subscription.model';
 import { CreateEmailSubscriptionDto } from './dto/create.email-subscription.dto';
 
 @Injectable()
-export class EmailSubscriptionService {
+export class EmailSubscriptionsService {
 
   constructor(@InjectModel(EmailSubscription) private emailSubscriptionModel: typeof EmailSubscription) {
   }

@@ -7,7 +7,7 @@ import {
   PrimaryKey,
   Table, UpdatedAt,
 } from 'sequelize-typescript';
-import { User } from '../../user/user.model';
+import { User } from '../../users/user.model';
 import { Role } from './role.model';
 
 @Table({ tableName: 'UserRoles' })
