@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
-import { PaymentService } from './payment.service';
-import { PaymentController } from './payment.controller';
+import { PaymentsService } from './payments.service';
+import { PaymentsController } from './payments.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
@@ -13,10 +13,10 @@ import { RavePayment } from './model/rave.payment.model';
     AuthModule,
     SharedModule
   ],
-  providers: [PaymentService],
-  controllers: [PaymentController]
+  providers: [PaymentsService],
+  controllers: [PaymentsController]
 })
-export class PaymentModule implements NestModule{
+export class PaymentsModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
   }
 
