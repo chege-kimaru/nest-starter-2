@@ -20,11 +20,11 @@ export class CloudinaryConfigService {
     });
   }
 
-  uploadBase64File(file, filename) {
+  uploadBase64File(file, filename, folder = '') {
     const parser = new DataURIParser();
     const fileData = parser.format(path.extname(filename).toString(), file).content;
     return this.Cloudinary.uploader.upload(fileData, {
-      folder: 'my-folder',
+      folder,
       // eslint-disable-next-line @typescript-eslint/camelcase
       resource_type: 'auto',
       // eslint-disable-next-line @typescript-eslint/camelcase
@@ -40,10 +40,11 @@ export class CloudinaryConfigService {
   }
 
   formatFileName(name) {
-    name = String(name).split(' ').join('-');
     const dotIndex = name.lastIndexOf('.');
-    // const ext = name.substr(dotIndex + 1);
-    return name.substr(0, dotIndex) + '-' + Date.now();
+    const ext = name.substr(dotIndex + 1);
+    return name
+      .substr(0, dotIndex)
+      .replace(/[^a-zA-Z0-9]/g, '-') + '-' + Date.now() + '.' + ext;
   };
 
 }
